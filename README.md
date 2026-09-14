@@ -73,3 +73,11 @@ mvn -Dtest=ApiTest test
 - Cucumber HTML report: `target/cucumber-reports/cucumber.html`
 - Cucumber JSON report: `target/cucumber-reports/cucumber.json`
 - Maven Surefire reports: `target/surefire-reports`
+
+## Sample Test Execution Reports
+The framework generates Cucumber HTML and JSON reports after test execution.
+Sample Execution screenshots are below:
+![cucumber-report-1.png](docs/screenshots/cucumber-report-1.png)
+![cucumber-report-2.png](docs/screenshots/cucumber-report-2.png)
+![cucumber-report-3.png](docs/screenshots/cucumber-report-3.png)
+
