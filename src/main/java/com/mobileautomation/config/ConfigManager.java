@@ -11,6 +11,7 @@ import java.util.Properties;
 public class ConfigManager {
 
 	private static final String DEFAULT_CONFIG_FILE = "config.properties";
+	private static final String DEFAULT_CONFIG_FILE_IOS = "config-ios.properties";
     private static final String CONFIG_FILE_SYSTEM_PROPERTY = "config.file";
 
 	private final Properties properties = new Properties();
@@ -22,15 +23,14 @@ public class ConfigManager {
 			return;
 		}
 
-		loadFromClasspath(DEFAULT_CONFIG_FILE);
-	}
-
-	public ConfigManager(String configFilePath) {
-		String path = Objects.requireNonNull(configFilePath, "Configuration file path cannot be null.").trim();
-		if (path.isEmpty()) {
-			throw new IllegalArgumentException("Configuration file path cannot be empty.");
+		String platform = System.getProperty("platform","android");
+		if("ios".equalsIgnoreCase(platform)) {
+			loadFromClasspath(DEFAULT_CONFIG_FILE_IOS);
 		}
-		load(path);
+		else{
+			loadFromClasspath(DEFAULT_CONFIG_FILE);
+		}
+
 	}
 
 	private void load(String configFilePath) {

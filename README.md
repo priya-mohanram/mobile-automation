@@ -69,6 +69,49 @@ mvn -Dtest=ApiTest test
 - AI assistance was used for scaffolding and iterative refactoring of framework code, locators, and test organization.
 - Final behavior depends on local/mobile environment setup and runtime configuration values.
 
+## Design Decisions and Assessment Approach
+### What I chose to use
+- Java as a programming language.
+- Appium for cross-platform mobile UI automation.
+- Cucumber for BDD and readable business scenarios.
+- JUnit Platform for test execution.
+- Maven for dependency management and build execution.
+- Page Object Model to separate locators and UI interactions from test scenarios.
+- REST Assured for API automation.
+- Appium inspector for validating mobile locators.
+
+### Why I chose this approach
+The framework separates configuration, driver management, reusable UI interactions, page-specific behavior, step
+definitions , and test scenarios.
+
+'DriverFactory' centralizes Android/iOS driver creation and life management.
+'BasePage' contains reusable interactions and explicit waits, while individual page Objects contain page-specific locators and behavior.
+
+Android uses UiAutomator2 and the framework is structured to support iOS through XCUITest. 
+Shared accessibility IDs are preferred where possible, with platform-specific locators used only where required.
+
+### How AI was used
+GitHub Copilot was used as a development assistant for scaffolding , refactoring, exploring implementing options, and documentation.
+
+AI-generated code was not acceptable blindly. Changes were reviewed before acceptance, locators were validated
+using Appium Inspector, and changes were verified through compilation and targeted test execution.
+
+AI suggestions that introduced unnecessary complexity or incorrect assumptions were modified or rejected.
+
+### Handling failures , limitations , and trade-offs
+Explicit waits are used instead of fixed sleeps for dynamic UI synchronization.
+Failure screenshots are attached to failed cucumber scenarios to improve debugging.
+
+Configuration is externalized so machine-specific values such as the application path do not need to be committed to source-control.
+
+The Android implementation was executed and validated locally. iOS configuration and provisional locator
+support are included, but iOS execution requires a macOS/Xcode environment or a supported cloud device infrastructure,
+so the iOS locators must be validated against the actual iOS accessibility hierarchy.
+
+When failures occur , the approach is to identify the root cause using test reports, Appium output, screenshots, locator
+inspection, and environment validation rather than masking failures with arbitrary waits or retries.
+
+
 ## Test Reports
 - Cucumber HTML report: `target/cucumber-reports/cucumber.html`
 - Cucumber JSON report: `target/cucumber-reports/cucumber.json`
